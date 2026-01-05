@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>ICAI Foundation – Result</title>
+  <style>
+    /* Base */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    /* Center wrapper */
+    .page-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 10px;
+    }
+
+    /* Card */
+    .result-card {
+      width: 100%;
+      max-width: 900px;
+      background-color: #ffffff;
+      border: 1px solid #ddd;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+    }
+
+    /* Header */
+    .card-header {
+      background-color: #7b1fa2;
+      color: #ffffff;
+      padding: 20px 30px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .icai-logo-circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      background-color: #9c27b0;
+    }
+
+    .card-header h1 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .card-header p {
+      font-size: 13px;
+    }
+
+    /* Body */
+    .card-body {
+      padding: 24px 30px 20px;
+      text-align: center;
+    }
+
+    .card-body h2 {
+      font-size: 18px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      margin-bottom: 16px;
+      color: #555;
+    }
+
+    /* Form */
+    form {
+      max-width: 480px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .form-row {
+      margin-bottom: 14px;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .form-row input[type="text"] {
+      width: 100%;
+      padding: 7px 8px;
+      font-size: 13px;
+      border: 1px solid #bbb;
+      border-radius: 2px;
+    }
+
+    .form-row input[type="text"]:focus {
+      outline: none;
+      border-color: #7b1fa2;
+    }
+
+    /* Captcha */
+    .captcha-row {
+      margin-top: 10px;
+    }
+
+    .captcha-box {
+      display: inline-block;
+      margin: 6px 0;
+      padding: 0;
+      border: 1px solid #333;
+      background-color: #f0f0f0;
+    }
+
+    #captchaCanvas {
+      display: block;
+    }
+
+    .note {
+      display: block;
+      font-size: 11px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    /* Buttons */
+    .form-actions {
+      margin-top: 12px;
+      text-align: center;
+    }
+
+    .btn {
+      min-width: 90px;
+      padding: 6px 16px;
+      margin: 0 4px;
+      font-size: 13px;
+      border-radius: 2px;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn.primary {
+      background-color: #7b1fa2;
+      color: #ffffff;
+      border-color: #7b1fa2;
+    }
+
+    .btn.primary:hover {
+      background-color: #6a1b9a;
+    }
+
+    .btn.secondary {
+      background-color: #e0e0e0;
+      color: #333;
+      border-color: #bdbdbd;
+    }
+
+    .btn.secondary:hover {
+      background-color: #d5d5d5;
+    }
+
+    /* Footer */
+    .card-footer {
+      background-color: #f3e5f5;
+      padding: 12px 30px 18px;
+      border-top: 1px solid #ddd;
+      font-size: 11px;
+      color: #444;
+    }
+
+    .hosted-by {
+      font-weight: bold;
+      margin-bottom: 6px;
+    }
+
+    .disclaimer {
+      line-height: 1.35;
+    }
+
+    /* Results section */
+    #resultsSection {
+      padding: 20px 30px 24px;
+      display: none;
+    }
+
+    #resultsSection h3 {
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    #resultsSection table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0;
+      font-size: 13px;
+    }
+
+    #resultsSection th,
+    #resultsSection td {
+      border: 1px solid #ccc;
+      padding: 6px 8px;
+      text-align: left;
+    }
+
+    #resultsSection th {
+      background-color: #eee;
+    }
+
+    .print-btn {
+      margin-top: 10px;
+      padding: 6px 16px;
+      font-size: 13px;
+      border-radius: 2px;
+      border: 1px solid #7b1fa2;
+      background-color: #7b1fa2;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .print-btn:hover {
+      background-color: #6a1b9a;
+    }
+
+    .roll-row {
+      background-color: #7b1fa2;
+      color: #ffffff;
+      padding: 6px 8px;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="result-card">
+      <!-- Header -->
+      <div class="card-header">
+        <img src="logo.png" width="90" height="90">
+        <div class=""></div>
+        <div>
+          <h1>The Institute of Chartered Accountants of India</h1>
+          <p>&nbsp;&nbsp;&nbsp;Examination Results, January 2026</p>
+        </div>
+      </div>
+
+      <!-- Body with form -->
+      <div class="card-body" id="formSection">
+        <h2>Foundation – Result</h2>
+        <p class="subtitle">Enter your 6 Digit Roll number to check your results</p>
+
+        <form id="resultForm">
+          <div class="form-row">
+            <label for="rollInput">Roll No.</label>
+            <input
+              type="text"
+              id="rollInput"
+              name="roll"
+              maxlength="6"
+              placeholder="Enter 6 digit Roll No."
+            />
+          </div>
+
+          <div class="form-row">
+            <label for="regInput">Registration No.</label>
+            <input
+              type="text"
+              id="regInput"
+              name="reg"
+              placeholder="Enter Registration No."
+            />
+          </div>
+
+          <div class="form-row captcha-row">
+            <label>Enter the text as shown in the below box</label>
+            <div class="captcha-box">
+              <canvas id="captchaCanvas" width="100" height="40"></canvas>
+            </div>
+            <input
+              type="text"
+              id="captchaInput"
+              placeholder="Enter captcha"
+            />
+            <span class="note">(For preventing automated submissions)</span>
+            <button type="button" class="btn secondary" id="refreshCaptcha" style="margin-top:6px;">
+              Refresh Captcha
+            </button>
+          </div>
+
+          <div class="form-actions">
+            <button type="reset" class="btn secondary">CLEAR</button>
+            <button type="submit" class="btn primary">SUBMIT</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Results section -->
+      <div id="resultsSection"></div>
+
+      <!-- Footer -->
+      <div class="card-footer">
+        <div class="hosted-by">Hosted by National Informatics Centre</div>
+        <div class="disclaimer">
+           Disclaimer:The result given is correct at the time of release of the result by the Institute which accepts no responsibility thereafter for errors or omissions caused as a result of their transmission via the Internet or their downloading or printing by the user. No material from this web site can be copied, reproduced, published, uploaded, posted, transmitted or distributed or dealt with in any manner, unless expressly authorized. Users are not permitted to change, modify or prepare derivative works from the content of this site. For any clarifications / confirmation please address your enquiries to Joint Secretary (Examinations), The Institute of Chartered Accountants of India, 'ICAI BHAWAN', Post Box No. 7112, Indraprastha Marg, New Delhi - 110 002
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const rollInput = document.getElementById('rollInput');
+    const captchaInput = document.getElementById('captchaInput');
+    const resultForm = document.getElementById('resultForm');
+    const resultsSection = document.getElementById('resultsSection');
+    const captchaCanvas = document.getElementById('captchaCanvas');
+    const refreshBtn = document.getElementById('refreshCaptcha');
+    let captchaText = '';
+
+    const mockResults = {
+      '743118': {
+        roll: '743118',
+        name: 'ANSHIKA MALAN',
+        papers: [
+          { name: 'Paper 1:  Accounting', marks: 62, max: 100 },
+          { name: 'Paper 2:  Business Laws', marks: 58, max: 100 },
+          { name: 'Paper 3:  Quantitative Aptitude-Business Mathematics,Logical Reasoning,Statistics', marks: 54, max: 100 },
+          { name: 'Paper 4:  Business Economics', marks: 88, max: 100 }
+        ]
+      },
+      '789012': {
+        roll: '789012',
+        name: 'Jane Smith',
+        papers: [
+          { name: 'Paper 1: Principles', marks: 35, max: 100 },
+          { name: 'Paper 2: Business Laws', marks: 42, max: 100 },
+          { name: 'Paper 3: Maths', marks: 38, max: 100 },
+          { name: 'Paper 4: Economics', marks: 45, max: 100 }
+        ],
+        total: 160,
+        maxTotal: 400,
+        status: 'Fail'
+      }
+    };
+
+    function padMarks(marks) {
+      return marks.toString().padStart(3, '0');
+    }
+
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      captchaText = '';
+      for (let i = 0; i < 6; i++) {
+        captchaText += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+
+      const ctx = captchaCanvas.getContext('2d');
+      ctx.fillStyle = 'white';
+      ctx.fillRect(0, 0, captchaCanvas.width, captchaCanvas.height);
+      ctx.fillStyle = '#333';
+      ctx.font = 'bold 24px Arial';
+      ctx.fillText(captchaText, 10, 30);
+
+      ctx.strokeStyle = '#ccc';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(0, Math.random() * captchaCanvas.height);
+      ctx.lineTo(captchaCanvas.width, Math.random() * captchaCanvas.height);
+      ctx.stroke();
+    }
+
+    function displayResults(data) {
+      
+      resultsSection.innerHTML = `
+        <h3>Roll NUMBER:&nbsp;${data.roll}</h3>
+        <p><strong>NAME:&nbsp; ${data.name}</strong></p>
+        <table>
+          <tr><th>PAPER : SUBJECT</th><th>MARKS</th></tr>
+          ${data.papers
+            .map(
+              p =>
+                `<tr><td>${p.name}</td><td>${padMarks(p.marks)}</td></tr>`
+            )
+            .join('')}
+            <tr style="font-weight: bold; background-color: #f0f8ff; font-size: 14px;">
+        <td>Total </td>
+        <td>${padMarks(262)}</td>
+        <tr><th>Result:  SUCCESSFULL</th><th></th></tr>
+        </table>
+        <button class="print-btn" onclick="window.print()">Download</button>
+      `;
+      resultsSection.style.display = 'block';
+      document.getElementById('formSection').style.display = 'none';
+    }
+
+    resultForm.addEventListener('submit', e => {
+      e.preventDefault();
+
+      if (captchaInput.value.toLowerCase() !== captchaText.toLowerCase()) {
+        alert('Incorrect captcha. Try again.');
+        generateCaptcha();
+        captchaInput.value = '';
+        captchaInput.focus();
+        return;
+      }
+
+      const roll = rollInput.value.trim();
+      const result = mockResults[roll];
+      if (result) {
+        displayResults(result);
+      } else {
+        alert('No record found. Try 123456 or 789012 (demo data only).');
+      }
+    });
+
+    refreshBtn.addEventListener('click', () => {
+      generateCaptcha();
+      captchaInput.value = '';
+    });
+
+    generateCaptcha();
+    rollInput.focus();
+  </script>
+</body>
+</html>
